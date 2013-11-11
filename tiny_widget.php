@@ -26,6 +26,9 @@ class Tiny_TOC_Widget extends WP_Widget {
 	}
 	
 	function widget( $args, $instance ) {
+		// only show widget on single pages
+		if( !is_single() ) return;
+
 		extract( $args );
 
 		//Our variables from the widget settings.
