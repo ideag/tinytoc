@@ -2,8 +2,8 @@
 /*
 Plugin Name: tinyTOC
 Plugin URI: http://wp.tribuna.lt/tiny-toc
-Description: Automaticly builds a Table of Contents once specific number (eg. 3) of headings (h1-h5) is reached and inserts it before or after post/page content
-Version: 0.1
+Description: Automaticly builds a Table of Contents once specific number (eg. 3) of headings (h1-h6) is reached and inserts it before or after post/page content
+Version: 0.2
 Author: Arūnas
 Author URI: http://wp.tribuna.lt/
 License: GPLv2 or later
@@ -24,14 +24,6 @@ load_muplugin_textdomain( 'tiny_toc', dirname( plugin_basename( __FILE__ ) ) . '
 // load associated files
 require_once(plugin_dir_path( __FILE__ ).'tiny_options.php');
 require_once(plugin_dir_path( __FILE__ ).'tiny_widget.php');
-
-// add css scripts
-function tiny_toc_scripts() {
-  wp_register_style( 'tiny-toc-style', plugins_url('tiny_toc.css', __FILE__) );
-  wp_enqueue_style( 'tiny-toc-style' );
-}
-add_action('wp_enqueue_scripts','tiny_toc_scripts');
-
 
 // init tinyConfiguration
 $tiny_toc_options = new tiny_toc_options(
@@ -97,7 +89,7 @@ add_action('admin_menu', array($tiny_toc_options,'add_page'));
  */
 function tiny_toc_filter($content) {
   global $tiny_toc_options;
-  list($toc, $toc_list) = tiny_toc_create($content,10);
+  list($toc, $toc_list) = tiny_toc_create($content,$tiny_toc_options->values['min']);
   $content = tiny_toc_replace($toc,$content);
   if ($tiny_toc_options->values['position']=='above') {
     $content = $toc_list.$content;
@@ -112,9 +104,7 @@ function tiny_toc_filter($content) {
  */
 function tiny_toc_create($content, $depth) {
   global $tiny_toc_options;
-  preg_match_all('/(<h([12345]{1})[^>]*>(.+?)<\/h[12345]{1}>)/ims', $content, $m);
-  //print '<pre>'.print_r($m,TRUE).'</pre>';exit;
-  //return $tiny_toc_options->values['min'];
+  preg_match_all('/(<h([123456]{1})[^>]*>(.+?)<\/h[123456]{1}>)/ims', $content, $m);
 
   $toc = tiny_toc_builder($m);
   if(empty($depth)) $depth = $tiny_toc_options->values['min'];

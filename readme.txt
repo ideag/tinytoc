@@ -3,7 +3,7 @@ Contributors: ideag
 Donate link: http://kava.tribuna.lt/en/
 Tags: table of contents, toc, headings
 Requires at least: 3.0.0
-Tested up to: 3.5.1
+Tested up to: 3.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -40,6 +40,10 @@ Not at the moment, but I am considering this feature in a later release.
 No screenshots.
 
 == Changelog ==
+
+= 0.2 =
+* Widget added (thanks to Darcy W. Christ)
+* Small bug fixes
 
 = 0.1 =
 * Initial release
