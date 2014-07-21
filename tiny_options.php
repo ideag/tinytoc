@@ -8,6 +8,7 @@ class tiny_toc_options {
   private $id = '';
   private $menu_title = '';
   private $title = '';
+  private $description = '';
   private $file = '';
   private $role = 'administrator';
 

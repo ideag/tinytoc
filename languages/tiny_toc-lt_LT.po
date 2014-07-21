@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tiny_toc 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-04 14:42+0300\n"
-"PO-Revision-Date: 2013-06-04 14:43+0300\n"
-"Last-Translator: Arūnas Liuiza <arunas@vini.lt>\n"
+"POT-Creation-Date: 2014-07-21 21:54+0300\n"
+"PO-Revision-Date: 2014-07-21 21:57+0300\n"
+"Last-Translator: Arūnas Liuiza <arunas@liuiza.lt>\n"
 "Language-Team: tinyStudio <studio@tiny.lt>\n"
 "Language: lt_LT\n"
 "MIME-Version: 1.0\n"
@@ -12,43 +12,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e;_x;_n\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-SearchPath-0: /var/www/wp-content/plugins/tiny_toc\n"
+"X-Poedit-SearchPath-0: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc\n"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:28
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:13
+msgid "A widget that displays a TOC for the post"
+msgstr "Skydelis, rodantis įrašo turinį (TOC)"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:15
+msgid "Tiny TOC Widget"
+msgstr "Turinio skydelis"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:45
+msgid "Table of Contents"
+msgstr "Turinys"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:45
+msgid "3"
+msgstr "3"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:48
+msgid "Title:"
+msgstr "Antraštė:"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_widget.php:53
+msgid "Minimum entries for TOC:"
+msgstr "Mažiausias turinio punktų kiekis:"
+
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:31
 msgid "tinyTOC"
 msgstr "tinyTOC"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:29
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:32
 msgid "tinyTOC Options"
 msgstr "tinyTOC Nustatymai"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:32
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:35
 msgid "Main Settings"
 msgstr "Nustatymai"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:36
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:39
 msgid "Minimum entries for TOC"
 msgstr "Mažiausias turinio punktų kiekis"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:53
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:56
 msgid "Insert TOC"
 msgstr "Turinį įterpti"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:57
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:60
 msgid "Above the text"
 msgstr "Prieš tekstą"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:58
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:61
 msgid "Below the text"
 msgstr "Po tekstu"
 
-#: /var/www/wp-content/plugins/tiny_toc/tiny_toc.php:106
-msgid "Table of Contents"
-msgstr "Turinys"
+#: /var/www/dev.skaitykit.lt/wp-content/plugins/tinytoc/tiny_toc.php:62
+msgid "Do not display automatically"
+msgstr "Nerodyti automatiškai"
 
 #~ msgid ""
 #~ "So you like using %3$s, huh. Fancy to buy %4$s a coffee? <a href=\"%2$s"

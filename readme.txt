@@ -3,7 +3,7 @@ Contributors: ideag
 Donate link: http://kava.tribuna.lt/en/
 Tags: table of contents, toc, headings
 Requires at least: 3.0.0
-Tested up to: 3.7.1
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,11 +12,13 @@ Automaticly builds a Table of Contents once specific number (eg. 3) of headings 
 
 == Description ==
 
-This plugin is meant to help with navigation in long texts by forming an automatic Wikipedia-like table of contents. 
+This plugin is meant to help with navigation in long texts by forming an automatic Wikipedia-like table of contents.
 
-It works by scannig the text for headings (`<h1>-<h6>` HTML tags). If more than a certain amount of headings (3 by default) are found - a table of contents with bookmarks is formed and inserted to the post content. Location (above or below) the text can be chosen in settings page.
+It works by scanning the text for headings (`<h1>-<h6>` HTML tags). If more than a certain amount of headings (3 by default) are found - a table of contents with bookmarks is formed and inserted to the post content. Location (above or below) the text can be chosen in settings page.
 
 TOC is formed as HTML5 `<nav>` element with nested ordered list inside. No specific styling is provided, so that it fits organicaly into the text. If you need specific styling, include it to your theme's CSS.
+
+You can also use a shortcode - [toc] - and a template tags - get_toc()/the_toc().
 
 == Installation ==
 
@@ -33,13 +35,17 @@ e.g.
 
 = Can I insert TOC at random place with a shortcode or template tag? =
 
-Not at the moment, but I am considering this feature in a later release.
+Yes, since version 0.3 you can use [toc] shortcode and get_toc()/the_toc() template tags.
 
 == Screenshots ==
 
 No screenshots.
 
 == Changelog ==
+
+= 0.3 =
+* shortcode and template tags added
+* parser rewriten (regex -> DOMDocument)
 
 = 0.2 =
 * Widget added (thanks to Darcy W. Christ)

@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
 Plugin Name: tinyTOC
 Plugin URI: http://wp.tribuna.lt/tiny-toc
 Description: Automaticly builds a Table of Contents once specific number (eg. 3) of headings (h1-h6) is reached and inserts it before or after post/page content
-Version: 0.2
+Version: 0.3
 Author: Arūnas
 Author URI: http://wp.tribuna.lt/
 License: GPLv2 or later
@@ -17,8 +17,8 @@ if ( !function_exists( 'add_action' ) ) {
 
 //==========================================================
 // init textdomain
-load_plugin_textdomain( 'tiny_toc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/'); 
-load_muplugin_textdomain( 'tiny_toc', dirname( plugin_basename( __FILE__ ) ) . '/languages/'); 
+load_plugin_textdomain( 'tiny_toc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+load_muplugin_textdomain( 'tiny_toc', dirname( plugin_basename( __FILE__ ) ) . '/languages/');
 
 //==========================================================
 // load associated files
@@ -67,7 +67,7 @@ $tiny_toc_options = new tiny_toc_options(
       )
     )
   ),
-  array( 
+  array(
     "use_css"=>false,
     "position"=>'above',
     "min"=>3
@@ -80,129 +80,133 @@ add_action('admin_init', array($tiny_toc_options,'init') );
 add_action('admin_menu', array($tiny_toc_options,'add_page'));
 
 
-//if ($tiny_toc_options->values['position']!='neither') {
-  add_filter( 'the_content', 'tiny_toc_filter', 100);
-//}
-
-/**
- *
- */
-function tiny_toc_filter($content) {
-  global $tiny_toc_options;
-  list($toc, $toc_list) = tiny_toc_create($content,$tiny_toc_options->values['min']);
-  $content = tiny_toc_replace($toc,$content);
-  if ($tiny_toc_options->values['position']=='above') {
-    $content = $toc_list.$content;
-  } elseif ($tiny_toc_options->values['position']=='below') {
-    $content = $content.$toc_list;
+add_filter( 'the_content', array('tiny_toc','filter'), 100);
+add_shortcode( 'toc', array('tiny_toc','shortcode'));
+function get_toc($attr=array()) {return tiny_toc::template($attr);}
+function the_toc($attr=array()) {echo tiny_toc::template($attr);}
+/* Find all headings and create a TOC */
+class tiny_toc {
+  static function template($attr=array()) {
+    global $post, $tiny_toc_options;
+    $min = (isset($attr['min'])&&$attr['min']>0)?$attr['min']:$tiny_toc_options->values['min'];
+    $toc = tiny_toc::create($post->post_content,$min);
+    return $toc;
   }
-  return $content;
-}
-
-/**
- * Find all headings and create a TOC
- */
-function tiny_toc_create($content, $depth) {
-  global $tiny_toc_options;
-  preg_match_all('/(<h([123456]{1})[^>]*>(.+?)<\/h[123456]{1}>)/ims', $content, $m);
-
-  $toc = tiny_toc_builder($m);
-  if(empty($depth)) $depth = $tiny_toc_options->values['min'];
-  if (sizeof($toc)>=$depth) {
-    $toc_list = tiny_toc_lister($toc);
+  static function shortcode($attr,$content=false) {
+    global $post, $tiny_toc_options;
+    $min = (isset($attr['min'])&&$attr['min']>0)?$attr['min']:$tiny_toc_options->values['min'];
+    $toc = tiny_toc::create($post->post_content,$min);
+    return $toc;
   }
-  return array($toc, $toc_list);
-}
-
-/**
- * 
- */
-function tiny_toc_replace($toc,$content) {
-  foreach ($toc as $item) {
-    $pat = $item['pattern'];
-    $rep = $item['replace'];    
-    $count = 1;
-    $content = str_replace($pat, $rep, $content, $count);
-  }
-  return $content;
-}
-
-/**
- *
- */
-function tiny_toc_lister($toc) {
-  global $tiny_toc_options;
-  $list = "<nav class=\"tiny_toc\">\n<ol>\n";
-  if ($tiny_toc_options->values['position']!='neither') $list .= "<h1>".__('Table of Contents','tiny_toc')."</h1>\n\n<ol>\n";
-  $level = 0;
-  $open = false;
-  foreach ($toc as $key=>$val) {
-    if ($val['level']>$level) {
-      while ($val['level']>$level) {
-        if (!$open) {
-          $list .= '<li>';
-          $open = true;
-        } 
-        $list .= "\n<ol>\n";
-        $open = false;
-        ++$level;
-      }
-    } elseif ($val['level']<$level) {
-      while ($val['level']<$level) {
-        $list .= "</li>\n</ol>\n</li>";
-        --$level;
-        $open = false;
-      }
+  static function filter($content) {
+    global $tiny_toc_options;
+    $toc = tiny_toc::create($content,$tiny_toc_options->values['min']);
+    if ($tiny_toc_options->values['position']=='above') {
+      $content = $toc.$content;
+    } elseif ($tiny_toc_options->values['position']=='below') {
+      $content = $content.$toc;
     }
-    // elseif ($val['level']==$level) {
-      if (!$open) {
-        $list .= '<li>';
-        $open = true;
-      } else {
-        $list .= "</li>\n<li>";
-        $open = true;
+    return $content;
+  }
+
+  static function find_parent(&$items,$item) {
+    if (sizeof($items)==0) { return 0; }
+    $i = 0;
+    $parent = false;
+    do {
+      ++$i;
+      $previous = sizeof($items)-$i;
+      if ($item->depth>$items[$previous]->depth) {
+        $parent = $items[$previous]->db_id;
       }
-      $list .="<a href=\"#{$val['id']}\">{$val['title']}</a>";
-    //}
+    } while (!$parent && sizeof($items)-$i > 0);
+    if (sizeof($items)-$i == 0) { return 0; }
+    $a = 0;
+    while ($item->depth - $items[$previous]->depth > 1) {
+      ++$a;
+      $empty_item = new stdClass();
+      $empty_item->text = '';
+      $empty_item->name = '';
+      $empty_item->depth = $item->depth-$a;
+      $empty_item->id = $parent.'-skip'.$a;
+      $empty_item->db_id = sizeof($items)+1;
+      $empty_item->parent = $parent;
+      $empty_item->empty = true;
+      $items[] = $empty_item;
+      $previous = sizeof($items)-$i;
+    }
+    return $parent;
   }
-  $last = array_pop($toc);
-  while ($last['level']<=$level) {
-    $list .= "</li>\n</ol>\n</li>";
-    --$level;
-  //  $open = false;
+
+  static function parse(&$content) {
+    $content = '<html><body>'.($content).'</body></html>';
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML($content);
+    libxml_use_internal_errors(false);
+    $xpath = new DOMXPath($dom);
+    $tags = $xpath->query('/html/body/*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]');
+    $items = array();
+    $min_depth = 6;
+    $parent = array();
+    for($i=0;$i<$tags->length;++$i) {
+      $id = $tags->item($i)->getAttribute('id');
+      if(!$id) {
+        $id = 'h'.$i;
+        $tags->item($i)->setAttribute('id',$id);
+      }
+      $depth = $tags->item($i)->nodeName[1];
+      if ($depth<$min_depth) {
+        $min_depth = $depth;
+      }
+      $item = new stdClass();
+      $item->text = $tags->item($i)->nodeValue;
+      $item->name = $tags->item($i)->nodeName;
+      $item->depth =$depth;
+      $item->id = $id;
+      $item->parent = tiny_toc::find_parent($items,$item);
+      $item->db_id = sizeof($items)+1;
+      $items[] = $item;
+    }
+    $text = $xpath->query('/html/body');
+    $text = $dom->saveHTML($text->item(0));
+    $content = $text;
+    return $items;
   }
-  $list .= "\n</ol>\n</nav>\n\n";
-  return $list;
+
+  static function create(&$content, $min) {
+    $items = tiny_toc::parse($content);
+    $output = '';
+    if (sizeof($items)>=$min) {
+      $walker = new tiny_toc_walker();
+      $output = $walker->walk($items,0);
+      $output = "<nav class=\"tiny_toc\">\n<ol>\n{$output}</ol>\n</nav>\n\n";
+    }
+    return $output;
+  }
 }
 
-/**
- * Scans the content and builds a map for the TOC
- */
-function tiny_toc_builder($m) {
-  $level = $m[2][0];
-  $toc = array();
-  $no=-1;
-  foreach ($m[2] as $key=>$val) {
-    ++$no;
-    if(preg_match('/id="([^"]+)"/',$m[1][$key],$n)) {
-      $id = $n[1];
+class tiny_toc_walker extends Walker {
+  var $db_fields = array(
+    'parent' => 'parent',
+    'id' => 'db_id'
+  );
+  function start_lvl(&$output, $depth = 0, $args = array()) {
+    $output .= "\n<ol>\n";
+  }
+  function start_el( &$output, $object, $depth = 0, $args = array(), $current_object_id = 0 ) {
+    $output .= '<li>';
+    if (isset($object->empty) && $object->empty) {
     } else {
-      $id = 'toc-'.$no;
+      $output .= "<a href=\"#{$object->id}\">{$object->text}</a>";
     }
-    $toc[$no] = array(
-      'id' => $id,
-      'title' => $m[3][$key],
-      'level' => $val-$level,
-      'pattern' => $m[1][$key],
-      'replace' => isset($n[1]) ? $m[1][$key] : preg_replace('/^<h([12345]{1})/','<h$1 id="'.$id.'"',$m[1][$key])
-    );
   }
-
-  return $toc;
+  function end_el( &$output, $object, $depth = 0, $args = array() ) {
+    $output .= "</li>\n";
+  }
+  function end_lvl(&$output,$depth=0,$args=array()) {
+    $output .= "</ol>\n";
+  }
 }
-
-// tiny_toc Widget
-
-
 
 ?>
