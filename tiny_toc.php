@@ -21,11 +21,8 @@ load_plugin_textdomain( 'tiny_toc', false, dirname( plugin_basename( __FILE__ ) 
 load_muplugin_textdomain( 'tiny_toc', dirname( plugin_basename( __FILE__ ) ) . '/languages/');
 
 //==========================================================
-// load associated files
-require_once(plugin_dir_path( __FILE__ ).'tiny_options.php');
-require_once(plugin_dir_path( __FILE__ ).'tiny_widget.php');
-
 // init tinyConfiguration
+require_once(plugin_dir_path( __FILE__ ).'includes/tiny_options.php');
 $tiny_toc_options = new tiny_toc_options(
   'tiny_toc',
   __('tinyTOC','tiny_toc'),
@@ -60,9 +57,12 @@ $tiny_toc_options = new tiny_toc_options(
               'above' => __('Above the text','tiny_toc'),
               'below' => __('Below the text','tiny_toc'),
               'neither' => __('Do not display automatically','tiny_toc'),
-//              'custom' =>
             )
           )
+        ),
+        'widget' => array(
+          'title'=>__('Use Widget','tiny_toc'),
+          'callback' => 'checkbox',
         )
       )
     )
@@ -70,14 +70,22 @@ $tiny_toc_options = new tiny_toc_options(
   array(
     "use_css"=>false,
     "position"=>'above',
-    "min"=>3
+    "min"=>3,
+    "widget"=>true
   ),
   __FILE__
 );
 $tiny_toc_options->load();
 register_activation_hook(__FILE__, array($tiny_toc_options,'add_defaults'));
-add_action('admin_init', array($tiny_toc_options,'init') );
-add_action('admin_menu', array($tiny_toc_options,'add_page'));
+if (is_admin()) {
+  add_action('admin_init', array($tiny_toc_options,'init') );
+  add_action('admin_menu', array($tiny_toc_options,'add_page'));
+}
+
+// load widget
+if (isset($tiny_toc_options->values['widget'])&&($tiny_toc_options->values['widget'])) {
+  require_once(plugin_dir_path( __FILE__ ).'includes/tiny_widget.php');
+}
 
 
 add_filter( 'the_content', array('tiny_toc','filter'), 100);
@@ -139,7 +147,7 @@ class tiny_toc {
   }
 
   static function parse(&$content) {
-    $content = '<html><body>'.($content).'</body></html>';
+    $content = '<html><head><meta charset="'.get_bloginfo('charset').'"></head><body>'.($content).'</body></html>';
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
     $dom->loadHTML($content);

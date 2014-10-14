@@ -3,8 +3,8 @@ Contributors: ideag
 Donate link: http://kava.tribuna.lt/en/
 Tags: table of contents, toc, headings
 Requires at least: 3.0.0
-Tested up to: 3.9.1
-Stable tag: trunk
+Tested up to: 4.0.0
+Stable tag: 0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ It works by scanning the text for headings (`<h1>-<h6>` HTML tags). If more than
 
 TOC is formed as HTML5 `<nav>` element with nested ordered list inside. No specific styling is provided, so that it fits organicaly into the text. If you need specific styling, include it to your theme's CSS.
 
-You can also use a shortcode - [toc] - and a template tags - get_toc()/the_toc().
+You can also use a shortcode - [toc], template tags - get_toc()/the_toc() and a widget - tinyTOC Widget.
 
 == Installation ==
 
@@ -26,8 +26,8 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Download and unzip `tiny_toc.zip`
-1. Upload `tiny_toc` directory to the `/wp-content/plugins/` directory
+1. Download and unzip `tinytoc.zip`
+1. Upload `tinytoc` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Check the configuration page at `Settings > tinyTOC`
 
@@ -42,6 +42,9 @@ Yes, since version 0.3 you can use [toc] shortcode and get_toc()/the_toc() templ
 No screenshots.
 
 == Changelog ==
+
+= 0.4 = 
+* fixed UTF-8 issue
 
 = 0.3 =
 * shortcode and template tags added
