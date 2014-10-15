@@ -4,7 +4,7 @@ Donate link: http://kava.tribuna.lt/en/
 Tags: table of contents, toc, headings
 Requires at least: 3.0.0
 Tested up to: 4.0.0
-Stable tag: 0.4
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,9 @@ Yes, since version 0.3 you can use [toc] shortcode and get_toc()/the_toc() templ
 No screenshots.
 
 == Changelog ==
+
+= 0.5 =
+* fixed some typos
 
 = 0.4 = 
 * fixed UTF-8 issue
