@@ -36,7 +36,7 @@ add_action( 'plugins_loaded', array( 'tinyTOC', 'init' ) );
 
 class tinyTOC {
   public static $options = array(
-    "general_position"  => 'above',
+    "general_position"  => 'before',
     "general_min"       => 3,
     "general_widget"    => true,
     "general_list_type" => 'ol',
@@ -227,8 +227,10 @@ class tinyTOC {
         $options['general_position'] = 'false';
       break;
     }
+    var_dump($options);
     self::$options = wp_parse_args( $options, self::$options );
     add_option( 'tinytoc_options', self::$options );
+    die();
     delete_option( 'tiny_toc_options' );
   }
   
