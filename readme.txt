@@ -31,6 +31,7 @@ Also try out my other plugins:
 
 An enormous amount of coffee was consumed while developing these plugins, so if you like what you get, please consider treating me to a [cup](http://kava.tribuna.lt/en/). Or two. Or ten.
 
+Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797880/)
 
 == Installation ==
 
