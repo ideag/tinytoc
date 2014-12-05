@@ -61,7 +61,7 @@ class tinyTOC {
       self::update_05($options);
     }
     $options = get_option( 'tinytoc_options' );
-    self::$options = wp_parse_args( $options, self::$options );
+    self::$options = wp_parse_args( self::$options, $options );
   }
   public static function init_settings() {
     $settings = array(
@@ -229,8 +229,8 @@ class tinyTOC {
     }
     unset($options['general_use_css']);
     self::$options = wp_parse_args( $options, self::$options );
-    add_option( 'tinytoc_options', self::$options );
-//    delete_option( 'tiny_toc_options' );
+    update_option( 'tinytoc_options', self::$options );
+    delete_option( 'tiny_toc_options' );
   }
   
   public static function uninstall() {
