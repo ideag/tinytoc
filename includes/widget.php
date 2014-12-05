@@ -12,6 +12,10 @@ class TinyTOC_Widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		// only show widget on single pages
 		if( !is_singular() ) return;
+		$toc = tinyTOC::create($GLOBALS['posts'][0]->post_content, $instance['min']);
+		if ( !$toc ) {
+			return;
+		}
 		extract( $args );
 		//Our variables from the widget settings.
 		$title = apply_filters('widget_title', $instance['title'] );
@@ -20,7 +24,7 @@ class TinyTOC_Widget extends WP_Widget {
 		// Display the widget title
 		if ( $title )
 			echo $before_title . $title . $after_title;
-		$toc = tiny_toc::create($GLOBALS['posts'][0]->post_content, $instance['min']);
+		$toc = tinyTOC::create($GLOBALS['posts'][0]->post_content, $instance['min']);
 		echo $toc;
 		echo $after_widget;
 	}
@@ -36,7 +40,7 @@ class TinyTOC_Widget extends WP_Widget {
 
 	function form( $instance ) {
 		//Set up some default widget settings.
-		$defaults = array( 'title' => __('Table of Contents', 'tinytoc'), 'min' => 3 );
+		$defaults = array( 'title' => __('Table of Contents', 'tinytoc'), 'min' => tinyTOC::$options['general_min']);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'tinytoc'); ?></label>

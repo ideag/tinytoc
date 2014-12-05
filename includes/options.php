@@ -63,12 +63,18 @@ class tinyTOC_Options {
       }
     }
     echo "</select>";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // CHECKBOX - Name: checkbox
   public static function checkbox($args) {
     $checked = checked( tinyTOC::$options[$args['option_id']], true, false );
     echo "<input ".$checked." id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' type='checkbox' value=\"1\"/>";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // TEXTAREA - Name: textarea - Arguments: rows:int=4 cols:int=20
@@ -76,12 +82,18 @@ class tinyTOC_Options {
     if (!$args['rows']) $args['rows']=4;
     if (!$args['cols']) $args['cols']=20;
     echo "<textarea id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' rows='{$args['rows']}' cols='{$args['cols']}' type='textarea'>".tinyTOC::$options[$args['option_id']]."</textarea>";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // TEXTBOX - Name: text - Arguments: size:int=40
   public static function text($args) {
     if (!$args['size']) $args['size']=40;
     echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='text' value='".tinyTOC::$options[$args['option_id']]."' />";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // NUMBER TEXTBOX - Name: text - Arguments: size:int=40
@@ -96,12 +108,18 @@ class tinyTOC_Options {
       }
     } 
     echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' type='number' value='".tinyTOC::$options[$args['option_id']]."'{$options}/>";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // PASSWORD-TEXTBOX - Name: password - Arguments: size:int=40
   public static function password($args) {
     if (!$args['size']) $args['size']=40;
     echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='password' value='".tinyTOC::$options[$args['option_id']]."' />";
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
 
   // RADIO-BUTTON - Name: plugin_options[option_set1]
@@ -118,6 +136,9 @@ class tinyTOC_Options {
         echo "<label><input ".$checked." value='$item' name='".self::$id."[{$args['option_id']}]' type='radio' /> $item</label><br />";
       }
     }
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
+    }
   }
   // checklist - Name: plugin_options[option_set1]
   public static function checklist($args) {
@@ -132,6 +153,9 @@ class tinyTOC_Options {
         $checked = checked( in_array( $item, tinyTOC::$options[$args['option_id']] ), true, false );
         echo "<label><input ".$checked." value='$item' name='".self::$id."[{$args['option_id']}][]' type='checkbox' /> $item</label><br />";
       }
+    }
+    if ( isset( $args['description'] ) ) {
+      echo '<p class="description">'.$args['description'].'</p>';
     }
   }
 

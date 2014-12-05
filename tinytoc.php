@@ -38,7 +38,7 @@ class tinyTOC {
   public static $options = array(
     "general_position"  => 'before',
     "general_min"       => 3,
-    "general_widget"    => true,
+    "general_widget"    => false,
     "general_list_type" => 'ol',
   );
   public static function init() {
@@ -56,12 +56,12 @@ class tinyTOC {
     load_plugin_textdomain( 'tinytoc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
   }
   public static function init_options() {
-    $options = get_option( 'tiny_toc_options' );
-    if ( $options ) {
-      self::update_05($options);
+    $options_old = get_option( 'tiny_toc_options' );
+    if ( $options_old ) {
+      self::update_05($options_old);
     }
     $options = get_option( 'tinytoc_options' );
-    self::$options = wp_parse_args( self::$options, $options );
+    self::$options = wp_parse_args( $options, self::$options );
   }
   public static function init_settings() {
     $settings = array(
@@ -80,10 +80,11 @@ class tinyTOC {
                 'min'  => 1,
                 'max'  => 10,
                 'step' => 1, 
+                'description' => __('How many headings have to be found in post content for TOC to be generated?', 'tinytoc'),
               )
             ),
             'list_type' => array(
-              'title'    => __('List type','tinytoc'),
+              'title'    => __('List appearance','tinytoc'),
               'callback' => 'radio',
               'args'     => array(
                 'values'   => array(
@@ -96,6 +97,7 @@ class tinyTOC {
               'title'    => __('Insert TOC','tinytoc'),
               'callback' => 'radio',
               'args'     => array(
+                'description' => __('Where to insert TOC in post content. Choose "Do not display aoutmatically" if you want to use widget/shortcode instead.', 'tinytoc'),
                 'values'   => array(
                   'before'   => __('Above the text','tinytoc'),
                   'after'    => __('Below the text','tinytoc'),
@@ -104,8 +106,11 @@ class tinyTOC {
               )
             ),
             'widget' => array(
-              'title'=>__('Use Widget','tinytoc'),
-              'callback' => 'checkbox',
+              'title'       => __( 'Enable Widget', 'tinytoc' ),
+              'callback'    => 'checkbox',
+              'args'     => array(
+                'description' => __( 'If unchecked, the tinyTOC widget will not be loaded.', 'tinytoc' )
+              ),
             )
           )
         )
@@ -139,7 +144,7 @@ class tinyTOC {
       $walker = new tinyTOC_walker();
       $output = $walker->walk($items,0);
       $tag = self::$options['general_list_type'];
-      $output = "<nav class=\"tiny_toc\">\n<{$tag}>\n{$output}</{$tag}>\n</nav>\n\n";
+      $output = "<nav class=\"tinytoc tiny_toc\">\n<{$tag}>\n{$output}</{$tag}>\n</nav>\n\n";
     }
     return $output;
   }
@@ -201,7 +206,7 @@ class tinyTOC {
       $item->name = $tags->item($i)->nodeName;
       $item->depth =$depth;
       $item->id = $id;
-      $item->parent = tiny_toc::find_parent($items,$item);
+      $item->parent = self::find_parent($items,$item);
       $item->db_id = sizeof($items)+1;
       $items[] = $item;
     }
@@ -226,6 +231,9 @@ class tinyTOC {
       case 'neither' : 
         $options['general_position'] = 'false';
       break;
+    }
+    if ( !isset( $options['general_widget'] ) ) {
+      $options['general_widget'] = false;
     }
     unset($options['general_use_css']);
     self::$options = wp_parse_args( $options, self::$options );
