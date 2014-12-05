@@ -227,11 +227,10 @@ class tinyTOC {
         $options['general_position'] = 'false';
       break;
     }
-    var_dump($options);
+    unset($options['general_use_css']);
     self::$options = wp_parse_args( $options, self::$options );
     add_option( 'tinytoc_options', self::$options );
-    die();
-    delete_option( 'tiny_toc_options' );
+//    delete_option( 'tiny_toc_options' );
   }
   
   public static function uninstall() {
