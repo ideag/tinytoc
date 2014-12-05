@@ -213,7 +213,7 @@ class tinyTOC {
   private static function update_05( $old_options = array() ) {
     $options = array();
     foreach ( $old_options as $key => $value ) {
-      $key = str_replace('main_', 'general_', $key);
+      $key = 'general_'.$key;
       $options[$key] = $value;
     }
     switch ($options['general_position']) {

@@ -21,18 +21,18 @@ class tinyTOC_Options {
     self::$title      = $args['title'];
     self::$role       = isset( $args['role'] ) && $args['role'] ? $args['role'] : self::$role;
     self::build_settings();
-    add_options_page(self::$title, self::$menu_title, self::$role, self::$file, array('tinyRelated_Options','page'));
+    add_options_page(self::$title, self::$menu_title, self::$role, self::$file, array('tinyTOC_Options','page'));
   }
 
   // Register our settings. Add the settings section, and settings fields
   public static function build_settings(){
-    register_setting( self::$id, self::$id, array( 'tinyRelated_Options' , 'validate' ) );
+    register_setting( self::$id, self::$id, array( 'tinyTOC_Options' , 'validate' ) );
     if (is_array(self::$fields)) foreach (self::$fields as $group_id => $group) {
-      add_settings_section( $group_id, $group['title'], $group['callback']?is_array($group['callback'])?$group['callback']:array('tinyRelated_Options',$group['callback']):'', self::$file );
+      add_settings_section( $group_id, $group['title'], $group['callback']?is_array($group['callback'])?$group['callback']:array('tinyTOC_Options',$group['callback']):'', self::$file );
       if (is_array($group['options'])) foreach ($group['options'] as $option_id => $option) {
         $option['args']['option_id'] = $group_id.'_'.$option_id;
         $option['args']['title'] = $option['title'];
-        add_settings_field($option_id, $option['title'], $option['callback']?is_array($option['callback'])?$option['callback']:array('tinyRelated_Options',$option['callback']):'', self::$file, $group_id,$option['args']);      
+        add_settings_field($option_id, $option['title'], $option['callback']?is_array($option['callback'])?$option['callback']:array('tinyTOC_Options',$option['callback']):'', self::$file, $group_id,$option['args']);      
       }
     }
   }
@@ -53,12 +53,12 @@ class tinyTOC_Options {
     echo "<select id='".self::$id."_{$args['option_id']}' name='".self::$id."[{$args['option_id']}]'>";
     if (self::is_assoc($items)) {
       foreach($items as $key=>$item) {
-        $selected = selected( $key, tinyRelated::$options[$args['option_id']], false );
+        $selected = selected( $key, tinyTOC::$options[$args['option_id']], false );
         echo "<option value='$key' $selected>$item</option>";
       }
     } else {
       foreach($items as $item) {
-        $selected = selected( $item, tinyRelated::$options[$args['option_id']], false );
+        $selected = selected( $item, tinyTOC::$options[$args['option_id']], false );
         echo "<option value='$item' $selected>$item</option>";
       }
     }
@@ -67,7 +67,7 @@ class tinyTOC_Options {
 
   // CHECKBOX - Name: checkbox
   public static function checkbox($args) {
-    $checked = checked( tinyRelated::$options[$args['option_id']], true, false );
+    $checked = checked( tinyTOC::$options[$args['option_id']], true, false );
     echo "<input ".$checked." id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' type='checkbox' value=\"1\"/>";
   }
 
@@ -75,13 +75,13 @@ class tinyTOC_Options {
   public static function textarea($args) {
     if (!$args['rows']) $args['rows']=4;
     if (!$args['cols']) $args['cols']=20;
-    echo "<textarea id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' rows='{$args['rows']}' cols='{$args['cols']}' type='textarea'>".tinyRelated::$options[$args['option_id']]."</textarea>";
+    echo "<textarea id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' rows='{$args['rows']}' cols='{$args['cols']}' type='textarea'>".tinyTOC::$options[$args['option_id']]."</textarea>";
   }
 
   // TEXTBOX - Name: text - Arguments: size:int=40
   public static function text($args) {
     if (!$args['size']) $args['size']=40;
-    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='text' value='".tinyRelated::$options[$args['option_id']]."' />";
+    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='text' value='".tinyTOC::$options[$args['option_id']]."' />";
   }
 
   // NUMBER TEXTBOX - Name: text - Arguments: size:int=40
@@ -95,13 +95,13 @@ class tinyTOC_Options {
         $options .= " {$key}=\"{$value}\"";
       }
     } 
-    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' type='number' value='".tinyRelated::$options[$args['option_id']]."'{$options}/>";
+    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' type='number' value='".tinyTOC::$options[$args['option_id']]."'{$options}/>";
   }
 
   // PASSWORD-TEXTBOX - Name: password - Arguments: size:int=40
   public static function password($args) {
     if (!$args['size']) $args['size']=40;
-    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='password' value='".tinyRelated::$options[$args['option_id']]."' />";
+    echo "<input id='{$args['option_id']}' name='".self::$id."[{$args['option_id']}]' size='{$args['size']}' type='password' value='".tinyTOC::$options[$args['option_id']]."' />";
   }
 
   // RADIO-BUTTON - Name: plugin_options[option_set1]
@@ -109,12 +109,12 @@ class tinyTOC_Options {
     $items = $args['values'];
     if (self::is_assoc($items)) {
       foreach($items as $key=>$item) {
-        $checked = checked( $key, tinyRelated::$options[$args['option_id']], false );
+        $checked = checked( $key, tinyTOC::$options[$args['option_id']], false );
         echo "<label><input ".$checked." value='$key' name='".self::$id."[{$args['option_id']}]' type='radio' /> $item</label><br />";
       }
     } else {
       foreach($items as $item) {
-        $checked = checked( $item, tinyRelated::$options[$args['option_id']], false );
+        $checked = checked( $item, tinyTOC::$options[$args['option_id']], false );
         echo "<label><input ".$checked." value='$item' name='".self::$id."[{$args['option_id']}]' type='radio' /> $item</label><br />";
       }
     }
@@ -124,12 +124,12 @@ class tinyTOC_Options {
     $items = $args['values'];
     if (self::is_assoc($items)) {
       foreach($items as $key=>$item) {
-        $checked = checked( in_array( $key, tinyRelated::$options[$args['option_id']] ), true, false );
+        $checked = checked( in_array( $key, tinyTOC::$options[$args['option_id']] ), true, false );
         echo "<label><input ".$checked." value='$key' name='".self::$id."[{$args['option_id']}][]' type='checkbox' /> $item</label><br />";
       }
     } else {
       foreach($items as $item) {
-        $checked = checked( in_array( $item, tinyRelated::$options[$args['option_id']] ), true, false );
+        $checked = checked( in_array( $item, tinyTOC::$options[$args['option_id']] ), true, false );
         echo "<label><input ".$checked." value='$item' name='".self::$id."[{$args['option_id']}][]' type='checkbox' /> $item</label><br />";
       }
     }
@@ -138,7 +138,7 @@ class tinyTOC_Options {
   // Display the admin options page
   public static function page() {
     if (!current_user_can(self::$role)) {
-        wp_die( __( 'You do not have sufficient permissions to access this page.', 'tinyrelated' ) );
+        wp_die( __( 'You do not have sufficient permissions to access this page.', 'tinyTOC' ) );
     }
   ?>
     <div class="wrap">
@@ -148,7 +148,7 @@ class tinyTOC_Options {
       <form action="options.php" method="post">
       <?php settings_fields(self::$id); ?>
       <?php do_settings_sections(self::$file); ?>
-      <?php submit_button( __( 'Save Changes', 'tinyrelated' ) , 'primary' ); ?>
+      <?php submit_button( __( 'Save Changes', 'tinyTOC' ) , 'primary' ); ?>
       </form>
     </div>
   <?php
