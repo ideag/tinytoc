@@ -4,7 +4,7 @@ Tags: table of contents, toc, headings, widget, shortcode
 Donate link: http://kava.tribuna.lt/en/
 Requires at least: 3.0.0
 Tested up to: 4.0.1
-Stable tag: 0.6.0
+Stable tag: 0.7.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,10 @@ Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797
 2. Settings screen.
 
 == Changelog ==
+
+= 0.7 =
+* an option to generate slug-based links
+
 
 = 0.6 =
 * a big code rewrite (options page, main class, etc.)

@@ -3,7 +3,7 @@
 Plugin Name: tinyTOC
 Plugin URI: http://wordpress.org/plugins/tinytoc
 Description: Automaticly builds a Table of Contents using headings (h1-h6) in post/page/CPT content
-Version: 0.6.0
+Version: 0.7.0
 Author: Arūnas Liuiza
 Author URI: http://klausk.aruno.lt/
 License: GPLv2
@@ -40,6 +40,7 @@ class tinyTOC {
     "general_min"       => 3,
     "general_widget"    => false,
     "general_list_type" => 'ol',
+    "general_bookmark"  => 'numeric',
   );
   public static function init() {
     self::init_options();
@@ -97,11 +98,23 @@ class tinyTOC {
               'title'    => __('Insert TOC','tinytoc'),
               'callback' => 'radio',
               'args'     => array(
-                'description' => __('Where to insert TOC in post content. Choose "Do not display aoutmatically" if you want to use widget/shortcode instead.', 'tinytoc'),
+                'description' => __('Where to insert TOC in post content. Choose "Do not display autmatically" if you want to use widget/shortcode instead.', 'tinytoc'),
                 'values'   => array(
                   'before'   => __('Above the text','tinytoc'),
                   'after'    => __('Below the text','tinytoc'),
                   'false'    => __('Do not display automatically','tinytoc'),
+                )
+              )
+            ),
+            'bookmark' => array(
+              'title'    => __('Link format','tinytoc'),
+              'callback' => 'radio',
+              'args'     => array(
+                'description' => __('What format to use for auto generated TOC links.', 'tinytoc'),
+                'values'   => array(
+                  'numeric'   => __('Numeric (e.g. #h1, #h2 ...)','tinytoc'),
+                  'slug'      => __('Text (e.g. #my-title-here)','tinytoc'),
+                  'combined'  => __('Combined (e.g. #h1-my-title-here)','tinytoc'),
                 )
               )
             ),
@@ -191,21 +204,35 @@ class tinyTOC {
     $items = array();
     $min_depth = 6;
     $parent = array();
-    for($i=0;$i<$tags->length;++$i) {
+    for ( $i=0; $i<$tags->length; ++$i ) {
+      $text = $tags->item($i)->nodeValue;
       $id = $tags->item($i)->getAttribute('id');
-      if(!$id) {
+      $name = $id;
+      if( !$id ) {
+        $slug = sanitize_title_with_dashes($text);
         $id = 'h'.$i;
-        $tags->item($i)->setAttribute('id',$id);
+        switch ( self::$options['general_bookmark'] ) {
+          case 'numeric' :
+            $name = $id;
+          break;
+          case 'slug' :
+            $name = $slug;
+          break;
+          case 'combined' :
+            $name = $id.'-'.$slug; 
+          break;
+        }
+        $tags->item($i)->setAttribute('id',$name);
       }
       $depth = $tags->item($i)->nodeName[1];
       if ($depth<$min_depth) {
         $min_depth = $depth;
       }
       $item = new stdClass();
-      $item->text = $tags->item($i)->nodeValue;
+      $item->text = $text;
       $item->name = $tags->item($i)->nodeName;
       $item->depth =$depth;
-      $item->id = $id;
+      $item->id = $name;
       $item->parent = self::find_parent($items,$item);
       $item->db_id = sizeof($items)+1;
       $items[] = $item;
