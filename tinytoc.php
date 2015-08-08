@@ -227,7 +227,7 @@ class tinyTOC {
         $old_name = $name;
         if ( in_array( $name, $used ) ) {
           $occurences = array_count_values($used);
-          $next_number = ( count( $occurences[$name] ) + 1 );
+          $next_number = ( $occurences[$name] + 1 );
           $name = $name .'-'. $next_number;
         }
         $used[] = $old_name;
