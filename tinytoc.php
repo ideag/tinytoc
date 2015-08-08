@@ -204,6 +204,7 @@ class tinyTOC {
     $items = array();
     $min_depth = 6;
     $parent = array();
+    $used = array();
     for ( $i=0; $i<$tags->length; ++$i ) {
       $text = $tags->item($i)->nodeValue;
       $id = $tags->item($i)->getAttribute('id');
@@ -222,6 +223,15 @@ class tinyTOC {
             $name = $id.'-'.$slug; 
           break;
         }
+        // Prevent the same names
+        $old_name = $name;
+        if ( in_array( $name, $used ) ) {
+          $occurences = array_count_values($used);
+          $next_number = ( count( $occurences[$name] ) + 1 );
+          $name = $name .'-'. $next_number;
+        }
+        $used[] = $old_name;
+
         $tags->item($i)->setAttribute('id',$name);
       }
       $depth = $tags->item($i)->nodeName[1];
