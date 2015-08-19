@@ -176,7 +176,7 @@ class tinyTOC {
         $parent = $items[$previous]->db_id;
       }
     } while (!$parent && sizeof($items)-$i > 0);
-    if (sizeof($items)-$i == 0) { return 0; }
+    if (!$parent && sizeof($items)-$i == 0) { return 0; }
     $a = 0;
     while ($item->depth - $items[$previous]->depth > 1) {
       ++$a;
