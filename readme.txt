@@ -4,7 +4,7 @@ Tags: table of contents, toc, headings, widget, shortcode
 Donate link: http://arunas.co#coffee
 Requires at least: 3.0.0
 Tested up to: 4.3.0
-Stable tag: 0.7.0
+Stable tag: 0.8.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,10 @@ Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797
 1. (optional) Modify options via `WP Admin > Settings > tinyTOC`, if needed. Plugin automatically embeds TOC top of post content, but you can use a widget, a shortcode (`[toc]`), a couple of template tags (`the_toc()/get_toc()`) for other integration options.
 
 == Frequently Asked Questions ==
+
+= I don't see tinyTOC Widget in the available widget list. =
+
+You need to activate the widget via plugin Settings page (`WP Admin > Settings > tinyTOC`)
 
 == Screenshots ==
 
@@ -89,7 +93,7 @@ Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797
 
 * Initial release
 
-== Upgrade Notice =
+== Upgrade Notice ==
 
 = 0.6 = 
 
