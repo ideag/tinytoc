@@ -47,6 +47,7 @@ class tinyTOC {
     if ( is_admin() ) {
       require_once ( plugin_dir_path( __FILE__ ).'includes/options.php' );
       add_action( 'admin_menu', array( 'tinyTOC', 'init_settings' ) );
+      add_filter( 'plugin_action_links', array( 'tinyTOC', 'settings_link' ), 10, 2 );
     }    
     add_filter(     'the_content',  array( 'tinyTOC', 'filter' ), 100 );
     add_shortcode(  'toc',          array( 'tinyTOC', 'shortcode' ) );
@@ -131,6 +132,17 @@ class tinyTOC {
     );
     tinyTOC_Options::init( $settings );
   }
+  public static function settings_link($links, $file) {
+    if ( $file === plugin_basename( __FILE__ ) ) {
+      $links['settings'] = '<a href="' .
+        admin_url( "options-general.php?page=tinytoc/includes/options.php" ) .
+        '">' . 
+        __( 'Settings', 'tinytoc' ) .
+        '</a>';
+    }
+    return $links;
+  }
+
 
   public static function shortcode($attr=array(),$content=false) {
     global $post;
