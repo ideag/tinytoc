@@ -299,5 +299,25 @@ class tinyTOC_walker extends Walker {
     $output .= "</ol>\n";
   }
 }
+global $wp_version;
+
+if (version_compare($wp_version, '2.8alpha', '>'))
+	add_filter('plugin_row_meta', 'filter_tinytoc_plugin_meta', 10, 2 ); // only 2.8 and higher
+add_filter('plugin_action_links', 'filter_tinytoc_plugin_meta', 10, 2 );
+
+function filter_tinytoc_plugin_meta($links, $file) {
+ 
+	/* create link */
+	if ($file == plugin_basename(__FILE__)) {
+		array_unshift(
+			$links,
+			sprintf('<a href="options-general.php?page=%s">%s</a>', 
+			        'tinytoc/includes/options.php', 
+					__('Settings'))
+		);
+	}
+ 
+	return $links;
+}
 
 ?>
