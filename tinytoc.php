@@ -194,6 +194,7 @@ class tinyTOC {
     return $parent;
   }
   private static function parse(&$content) {
+    $content = mb_convert_encoding($content, 'HTML-ENTITIES', get_bloginfo('charset'));
     $content = '<html><head><meta charset="'.get_bloginfo('charset').'"></head><body>'.($content).'</body></html>';
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
@@ -249,7 +250,7 @@ class tinyTOC {
       $items[] = $item;
     }
     $text = $xpath->query('/html/body');
-    $text = $dom->saveHTML($text->item(0));
+    $text = ( version_compare(PHP_VERSION, '5.3.6', '>=') ? $dom->saveHTML($text->item(0)) : $dom->saveXML($text->item(0)) );
     $content = $text;
     return $items;
   }
