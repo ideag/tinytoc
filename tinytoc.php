@@ -3,14 +3,14 @@
 Plugin Name: tinyTOC
 Plugin URI: http://wordpress.org/plugins/tinytoc
 Description: Automaticly builds a Table of Contents using headings (h1-h6) in post/page/CPT content
-Version: 0.7.0
+Version: 0.8.0
 Author: Arūnas Liuiza
-Author URI: http://klausk.aruno.lt/
+Author URI: http://arunas.co/
 License: GPLv2
 Text Domain: tinytoc
 Domain Path: /languages
 
-    Copyright 2014  Arūnas Liuiza  (email : klausk@aruno.lt)
+    Copyright 2014  Arūnas Liuiza  (email : ask@arunas.co)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -194,6 +194,7 @@ class tinyTOC {
     return $parent;
   }
   private static function parse(&$content) {
+    $content = mb_convert_encoding($content, 'HTML-ENTITIES', get_bloginfo('charset'));
     $content = '<html><head><meta charset="'.get_bloginfo('charset').'"></head><body>'.($content).'</body></html>';
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
@@ -250,6 +251,10 @@ class tinyTOC {
     }
     $text = $xpath->query('/html/body');
     $text = $dom->saveHTML($text->item(0));
+    if ( version_compare(PHP_VERSION, '5.3.6', '<') ) {
+      $text = str_replace( array('<html>', '</html>', '<body>', '</body>'), '', $text );
+      $text = preg_replace( '/^<!DOCTYPE.+?>/', '', $text );
+    }
     $content = $text;
     return $items;
   }
