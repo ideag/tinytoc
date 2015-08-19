@@ -12,19 +12,19 @@ class TinyTOC_Widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		// only show widget on single pages
 		if( !is_singular() ) return;
-		$toc = tinyTOC::create($GLOBALS['posts'][0]->post_content, $instance['min']);
+		$content = apply_filters('tinytoc_widget_content', $GLOBALS['posts'][0]->post_content );
+		$min = $instance['min'];
+		$toc = tinyTOC::create($content, $min);
 		if ( !$toc ) {
 			return;
 		}
 		extract( $args );
 		//Our variables from the widget settings.
 		$title = apply_filters('widget_title', $instance['title'] );
-		$min = $instance['min'];
 		echo $before_widget;
 		// Display the widget title
 		if ( $title )
 			echo $before_title . $title . $after_title;
-		$toc = tinyTOC::create($GLOBALS['posts'][0]->post_content, $instance['min']);
 		echo $toc;
 		echo $after_widget;
 	}
