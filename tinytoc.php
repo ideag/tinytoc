@@ -209,7 +209,8 @@ class tinyTOC {
       $id = $tags->item($i)->getAttribute('id');
       $name = $id;
       if( !$id ) {
-        $slug = sanitize_title_with_dashes($text);
+        $slug = remove_accents($text);
+        $slug = sanitize_title_with_dashes($slug);
         $id = 'h'.$i;
         switch ( self::$options['general_bookmark'] ) {
           case 'numeric' :
