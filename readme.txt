@@ -1,9 +1,9 @@
 === tinyTOC ===
 Contributors: ideag
 Tags: table of contents, toc, headings, widget, shortcode
-Donate link: http://kava.tribuna.lt/en/
+Donate link: http://arunas.co#coffee
 Requires at least: 3.0.0
-Tested up to: 4.0.1
+Tested up to: 4.3.0
 Stable tag: 0.7.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,12 +24,13 @@ The plugin is translation ready and has Lithuanian translation.
 
 Also try out my other plugins:
 
-* [Gust](http://tiny.lt/gust) - a Ghost-like admin panel for WordPress, featuring Markdown based split-view editor.
-* [tinyCoffee](http://tiny.lt/tinycoffee) - a PayPal donations button with a twist. Ask people to treat you to a coffee/beer/etc. 
-* [tinyRelated](http://tiny.lt/tinyrelated) - a plugin to manually assign and display related posts.
-* [tinyIP](http://tiny.lt/tinyip) - *Premium* - stop WordPress users from sharing login information, force users to be logged in only from one device at a time.
+* [Gust](http://arunas.co/gust) - a Ghost-like admin panel for WordPress, featuring Markdown based split-view editor.
+* [tinyCoffee](http://arunas.co/tinycoffee) - a PayPal donations button with a twist. Ask people to treat you to a coffee/beer/etc. 
+* [tinySocial](http://arunas.co/tinysocial) - a plugin to display social sharing links to Facebook/Twitter/etc. via shortcodes
+* [tinyRelated](http://arunas.co/tinyrelated) - a plugin to manually assign and display related posts.
+* [tinyIP](http://arunas.co/tinyip) - *Premium* - stop WordPress users from sharing login information, force users to be logged in only from one device at a time.
 
-An enormous amount of coffee was consumed while developing these plugins, so if you like what you get, please consider treating me to a [cup](http://kava.tribuna.lt/en/). Or two. Or ten.
+An enormous amount of coffee was consumed while developing these plugins, so if you like what you get, please consider treating me to a [cup](http://arunas.co#coffee). Or two. Or ten.
 
 Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797880/)
 
@@ -48,32 +49,48 @@ Cover image credit: [Jeremy Keith](https://www.flickr.com/photos/adactio/1523797
 
 == Changelog ==
 
+= 0.8.0 = 
+
+* a `tinytoc_widget_content` filter (by Maciej Gryniuk / odie2 )
+* better non-latin character support (by Maciej Gryniuk / odie2 )
+* prevent duplicate slugs (by Maciej Gryniuk / odie2 )
+* better `PHP < 5.3.6` support (suggested by Maciej Gryniuk / odie2 )
+* a link to plugin settings from Plugins list (suggested by Maciej Gryniuk / odie2 )
+* updated widget code to remove PHP4 style constructors
+
 = 0.7 =
+
 * an option to generate slug-based links
 
-
 = 0.6 =
+
 * a big code rewrite (options page, main class, etc.)
 * renamed main plugin file to fit WordPress tradition better. Plugin will be deactivated after upgrade and you'll need to reactivate it.
 
 = 0.5 =
+
 * fixed some typos
 
 = 0.4 = 
+
 * fixed UTF-8 issue
 
 = 0.3 =
+
 * shortcode and template tags added
 * parser rewriten (regex -> DOMDocument)
 
 = 0.2 =
+
 * Widget added (thanks to Darcy W. Christ)
 * Small bug fixes
 
 = 0.1 =
+
 * Initial release
 
 == Upgrade Notice =
 
 = 0.6 = 
+
 Renamed main plugin file to fit WordPress tradition better. Plugin will be deactivated after upgrade and you'll need to reactivate it.
