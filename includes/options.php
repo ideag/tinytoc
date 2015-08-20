@@ -162,7 +162,7 @@ class tinyTOC_Options {
   // Display the admin options page
   public static function page() {
     if (!current_user_can(self::$role)) {
-        wp_die( __( 'You do not have sufficient permissions to access this page.', 'tinyTOC' ) );
+        wp_die( __( 'You do not have sufficient permissions to access this page.', 'tinytoc' ) );
     }
   ?>
     <div class="wrap">
@@ -172,7 +172,7 @@ class tinyTOC_Options {
       <form action="options.php" method="post">
       <?php settings_fields(self::$id); ?>
       <?php do_settings_sections(self::$file); ?>
-      <?php submit_button( __( 'Save Changes', 'tinyTOC' ) , 'primary' ); ?>
+      <?php submit_button( __( 'Save Changes', 'tinytoc' ) , 'primary' ); ?>
       </form>
     </div>
   <?php
