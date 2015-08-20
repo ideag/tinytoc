@@ -2,7 +2,7 @@
 /*
 Plugin Name: tinyTOC
 Plugin URI: http://wordpress.org/plugins/tinytoc
-Description: Automaticly builds a Table of Contents using headings (h1-h6) in post/page/CPT content
+Description: Automatically builds a Table of Contents using headings (h1-h6) in post/page/CPT content
 Version: 0.7.0
 Author: Arūnas Liuiza
 Author URI: http://klausk.aruno.lt/
@@ -98,7 +98,7 @@ class tinyTOC {
               'title'    => __('Insert TOC','tinytoc'),
               'callback' => 'radio',
               'args'     => array(
-                'description' => __('Where to insert TOC in post content. Choose "Do not display autmatically" if you want to use widget/shortcode instead.', 'tinytoc'),
+                'description' => __('Where to insert TOC in post content. Choose "Do not display automatically" if you want to use widget/shortcode instead.', 'tinytoc'),
                 'values'   => array(
                   'before'   => __('Above the text','tinytoc'),
                   'after'    => __('Below the text','tinytoc'),
