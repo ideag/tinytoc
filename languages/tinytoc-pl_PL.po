@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tiny_toc 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-20 23:53+0200\n"
+"PO-Revision-Date: 2015-08-21 00:02+0200\n"
+"Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
+"Language-Team: tinyStudio <studio@tiny.lt>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/options.php:165
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+"Nie posiadasz wystarczających uprawnień, aby uzyskać dostęp do tej strony."
+
+#: includes/options.php:175
+msgid "Save Changes"
+msgstr "Zapisz zmiany"
+
+#: includes/widget.php:7
+msgid "A widget that displays a TOC for the post"
+msgstr "Widget wyświetlający spis treści dla wpisu"
+
+#: includes/widget.php:9
+msgid "Tiny TOC Widget"
+msgstr "Widget Lekkiego spisu treści"
+
+#: includes/widget.php:44
+msgid "Table of Contents"
+msgstr "Spis treści"
+
+#: includes/widget.php:47
+msgid "Title:"
+msgstr "Tytuł:"
+
+#: includes/widget.php:52
+msgid "Minimum entries for TOC:"
+msgstr "Min. liczba nagłówków dla spisu:"
+
+#: tinytoc.php:30
+msgid "No script kiddies please!"
+msgstr "Proszę nie kombinować ze skryptami!"
+
+#: tinytoc.php:67
+msgid "tinyTOC Options"
+msgstr "Opcje Lekkiego spisu treści"
+
+#: tinytoc.php:68
+msgid "tinyTOC"
+msgstr "Lekki spis treści"
+
+#: tinytoc.php:71
+msgid "Main Settings"
+msgstr "Główne ustawienia"
+
+#: tinytoc.php:75
+msgid "Minimum entries for TOC"
+msgstr "Min. liczba nagłówków dla spisu"
+
+#: tinytoc.php:81
+msgid ""
+"How many headings have to be found in post content for TOC to be generated?"
+msgstr ""
+"Określ minimalną ilość wystąpień nagłówków w treści wpisu dla wygenerowania "
+"spisu treści."
+
+#: tinytoc.php:85
+msgid "List appearance"
+msgstr "Styl listy"
+
+#: tinytoc.php:89
+msgid "Numbers"
+msgstr "Numerowanie"
+
+#: tinytoc.php:90
+msgid "Bullets"
+msgstr "Wypunktowanie"
+
+#: tinytoc.php:95
+msgid "Insert TOC"
+msgstr "Wstaw spis treści"
+
+#: tinytoc.php:98
+msgid ""
+"Where to insert TOC in post content. Choose \"Do not display automatically\" "
+"if you want to use widget/shortcode instead."
+msgstr ""
+"Wybierz gdzie we wpisie wstawić spis treści. Wybierz \"Nie wstawiaj "
+"automatycznie\", jeżeli wolisz użyć widgetu lub krótkiego kodu."
+
+#: tinytoc.php:100
+msgid "Above the text"
+msgstr "Nad tekstem"
+
+#: tinytoc.php:101
+msgid "Below the text"
+msgstr "Poniżej tekstu"
+
+#: tinytoc.php:102
+msgid "Do not display automatically"
+msgstr "Nie wstawiaj automatycznie"
+
+#: tinytoc.php:107
+msgid "Link format"
+msgstr "Format odnośnika"
+
+#: tinytoc.php:110
+msgid "What format to use for auto generated TOC links."
+msgstr "Wybierz format automatycznie generowanych odnośników spisu treści."
+
+#: tinytoc.php:112
+msgid "Numeric (e.g. #h1, #h2 ...)"
+msgstr "Numeryczny (np. #h1, #h2 ...)"
+
+#: tinytoc.php:113
+msgid "Text (e.g. #my-title-here)"
+msgstr "Tekstowy (np. #moj-naglowek)"
+
+#: tinytoc.php:114
+msgid "Combined (e.g. #h1-my-title-here)"
+msgstr "Mieszany (np. #h1-moj-naglowek)"
+
+#: tinytoc.php:119
+msgid "Enable Widget"
+msgstr "Aktywuj widget"
+
+#: tinytoc.php:122
+msgid "If unchecked, the tinyTOC widget will not be loaded."
+msgstr "Gdy oznaczone, widget Lekkiego spisu treści nie zostanie załadowany."
+
+msgid ""
+"Automatically builds a Table of Contents using headings (h1-h6) in post/page/"
+"CPT content"
+msgstr ""
+"Automatycznie tworzy spis treści za pomocą zawartości wpisu/strony/własnego "
+"rodzaju treści."
+
+#~ msgid "3"
+#~ msgstr "3"
