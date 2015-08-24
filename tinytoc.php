@@ -151,6 +151,7 @@ class tinyTOC {
     return $content;
   }
   public static function create(&$content, $min) {
+    $content = apply_filters( 'tinytoc_content', $content );
     $items = self::parse($content);
     $output = '';
     if (sizeof($items)>=$min) {

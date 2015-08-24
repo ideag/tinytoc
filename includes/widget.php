@@ -12,9 +12,8 @@ class TinyTOC_Widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		// only show widget on single pages
 		if( !is_singular() ) return;
-		$content = apply_filters('tinytoc_widget_content', $GLOBALS['posts'][0]->post_content );
 		$min = $instance['min'];
-		$toc = tinyTOC::create($content, $min);
+		$toc = tinyTOC::create($GLOBALS['posts'][0]->post_content, $min);
 		if ( !$toc ) {
 			return;
 		}
