@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tiny_toc 0.1\n"
+"Project-Id-Version: tiny_toc 0.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-20 23:53+0200\n"
-"PO-Revision-Date: 2015-08-21 00:02+0200\n"
+"PO-Revision-Date: 2015-08-29 16:28+0200\n"
 "Last-Translator: Maciej Gryniuk <maciejka45@gmail.com>\n"
-"Language-Team: tinyStudio <studio@tiny.lt>\n"
+"Language-Team: Maciej Gryniuk <maciejka45@gmail.com>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -136,7 +136,7 @@ msgstr "Aktywuj widget"
 
 #: tinytoc.php:122
 msgid "If unchecked, the tinyTOC widget will not be loaded."
-msgstr "Gdy oznaczone, widget Lekkiego spisu treści nie zostanie załadowany."
+msgstr "Gdy odznaczone, widget Lekkiego spisu treści nie zostanie załadowany."
 
 msgid ""
 "Automatically builds a Table of Contents using headings (h1-h6) in post/page/"
