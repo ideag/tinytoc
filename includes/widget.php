@@ -6,7 +6,7 @@ class TinyTOC_Widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'classname' => 'tinytoc tiny_toc', 'description' => __('A widget that displays a TOC for the post', 'tinytoc') );
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'tinytoc-widget' );
-		$this->WP_Widget( 'tinytoc-widget', __('Tiny TOC Widget', 'tinytoc'), $widget_ops, $control_ops );
+		parent::__construct( 'tinytoc-widget', __('Tiny TOC Widget', 'tinytoc'), $widget_ops, $control_ops );
 	}
 
 	function widget( $args, $instance ) {
