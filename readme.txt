@@ -24,6 +24,7 @@ The plugin is translation ready and has Lithuanian translation.
 
 Also try out my other plugins:
 
+* [Content Cards](http://arunas.co/cc) - a plugin that makes ordinary web links great by making it possible to embed a beautiful Content Card to link to any web site.
 * [Gust](http://arunas.co/gust) - a Ghost-like admin panel for WordPress, featuring Markdown based split-view editor.
 * [tinyCoffee](http://arunas.co/tinycoffee) - a PayPal donations button with a twist. Ask people to treat you to a coffee/beer/etc. 
 * [tinySocial](http://arunas.co/tinysocial) - a plugin to display social sharing links to Facebook/Twitter/etc. via shortcodes
