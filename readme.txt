@@ -3,7 +3,7 @@ Contributors: ideag
 Tags: table of contents, toc, headings, widget, shortcode
 Donate link: http://arunas.co#coffee
 Requires at least: 3.0.0
-Tested up to: 4.4.0
+Tested up to: 4.4
 Stable tag: 0.8.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
