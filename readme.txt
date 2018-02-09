@@ -54,6 +54,10 @@ You need to activate the widget via plugin Settings page (`WP Admin > Settings >
 
 == Changelog ==
 
+= 0.8.1 = 
+
++ test release for Deployer integration
+
 = 0.8.0 = 
 
 * a `tinytoc_widget_content` filter (by Maciej Gryniuk / odie2 )
