@@ -3,7 +3,7 @@
 Plugin Name: tinyTOC
 Plugin URI: http://wordpress.org/plugins/tinytoc
 Description: Automaticly builds a Table of Contents using headings (h1-h6) in post/page/CPT content
-Version: 0.8.0
+Version: 0.8.1
 Author: Arūnas Liuiza
 Author URI: http://arunas.co/
 License: GPLv2
